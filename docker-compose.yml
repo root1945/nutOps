@@ -20,6 +20,7 @@ services:
     container_name: nutOps
     environment:
       - DATABASE_URL=mysql://root:cN4AKvtgJfbsk69T@mysql-db:3306/nutOps_database
+      - SECRET_TOKEN=#2\rE55ab~HM4S5!
     ports:
       - 3030:3030
     volumes:
