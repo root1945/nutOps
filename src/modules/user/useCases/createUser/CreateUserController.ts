@@ -7,14 +7,15 @@ import { CreateUserUseCase } from "./CreateUserUseCase";
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
-    validator(request.body, ["name", "email", "password"]);
-    const { name, email, password } = request.body;
+    validator(request.body, ["name", "email", "phone", "password"]);
+    const { name, email, phone, password } = request.body;
 
     const createUserUseCase = container.resolve(CreateUserUseCase);
 
     const user = await createUserUseCase.execute({
       name,
       email,
+      phone,
       password,
     });
 

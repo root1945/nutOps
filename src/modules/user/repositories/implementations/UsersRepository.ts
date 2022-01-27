@@ -14,11 +14,17 @@ class UsersRepository implements IUsersRepository {
     this.repository = prisma.users;
   }
 
-  async create({ name, email, password }: ICreateUserDTO): Promise<IUser> {
+  async create({
+    name,
+    email,
+    password,
+    phone,
+  }: ICreateUserDTO): Promise<IUser> {
     const user = await this.repository.create({
       data: {
         email,
         name,
+        phone,
         password,
       },
     });
