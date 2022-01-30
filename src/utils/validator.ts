@@ -1,4 +1,4 @@
-import { AppError } from "errors/AppError";
+import { AppError } from "@errors/AppError";
 
 const validator = (body: any, fields: string[]) => {
   fields.forEach((field) => {
