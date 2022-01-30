@@ -5,10 +5,10 @@ services:
     image: mysql
     restart: always
     environment:
-      MYSQL_DATABASE: 'nutOps_database'
-      MYSQL_USER: 'docker'
-      MYSQL_PASSWORD: 'cN4AKvtgJfbsk69T'
-      MYSQL_ROOT_PASSWORD: 'cN4AKvtgJfbsk69T'
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     ports:
       - '3306:3306'
     expose:
@@ -19,8 +19,8 @@ services:
     build: .
     container_name: nutOps
     environment:
-      - DATABASE_URL=mysql://root:cN4AKvtgJfbsk69T@mysql-db:3306/nutOps_database
-      - SECRET_TOKEN=#2\rE55ab~HM4S5!
+      DATABASE_URL: ${DATABASE_URL}
+      SECRET_TOKEN: ${SECRET_TOKEN}
     ports:
       - 3030:3030
     volumes:
