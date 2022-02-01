@@ -33,4 +33,18 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           source: "., !node_modules"
-          target: "~/nutOps/nutOps"
+          target: "~/nutOps/nutOps"  
+      - name: Update Api
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+           cd ~/nutOps/nutOps
+           yarn
+           yarn prisma generate
+           yarn prisma migrate dev
+           yarn build
+           pm2 restart nutops_api
