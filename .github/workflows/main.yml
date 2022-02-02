@@ -44,7 +44,7 @@ jobs:
           script: |
            cd ~/nutOps/nutOps
            yarn
-           yarn prisma generate
            yarn prisma migrate dev
+           yarn prisma generate
            yarn build
            pm2 restart nutops_api
