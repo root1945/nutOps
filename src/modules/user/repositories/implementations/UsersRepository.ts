@@ -49,6 +49,15 @@ class UsersRepository implements IUsersRepository {
     });
     return user;
   }
+
+  async findByPhone(phone: string): Promise<IUser> {
+    const user = await this.repository.findUnique({
+      where: {
+        phone,
+      },
+    });
+    return user;
+  }
 }
 
 export { UsersRepository };

@@ -12,7 +12,7 @@ class CreateUserUseCase {
   constructor(
     @inject("UsersRepository")
     private usersRepository: IUsersRepository
-  ) {}
+  ) { }
 
   async execute({
     name,
@@ -24,6 +24,12 @@ class CreateUserUseCase {
 
     if (userAlreadyExists) {
       throw new AppError("User already exists");
+    }
+
+    const phoneAlreadyExists = await this.usersRepository.findByPhone(phone);
+
+    if (phoneAlreadyExists) {
+      throw new AppError("Phone already exists");
     }
 
     const passwordHash = await hash(password, 8);
