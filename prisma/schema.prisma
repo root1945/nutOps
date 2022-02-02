@@ -17,3 +17,11 @@ model Users {
 
   @@map("users")
 }
+
+model Permissions {
+  id         String   @id @default(uuid())
+  name       String
+  created_at DateTime @default(now())
+
+  @@map("permissions")
+}
