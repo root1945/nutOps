@@ -39,4 +39,17 @@ describe("Authenticate User", () => {
       await createUserUseCase.execute(user);
     }).rejects.toBeInstanceOf(AppError);
   });
+
+  it("must not be able to create a user with already existing phone", () => {
+    expect(async () => {
+      const user: ICreateUserDTO = {
+        name: "Leandro",
+        email: "leandro@gmail.com",
+        phone: "11956585586",
+        password: "leandro54",
+      };
+
+      await createUserUseCase.execute(user);
+    }).rejects.toBeInstanceOf(AppError);
+  });
 });
