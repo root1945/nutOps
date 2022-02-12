@@ -30,7 +30,7 @@ class AuthenticateUserUseCase {
 
     if (!passwordMatch) throw new AppError("Email/Password incorrect!");
 
-    const token = sign({}, process.env.SECRET_TOKEN, {
+    const token = sign({}, process.env.SECRET_TOKEN || ":;c7T<(P-)T5Xq=T", {
       subject: user.id,
       expiresIn: "15m",
     });
