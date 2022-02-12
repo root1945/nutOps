@@ -1,25 +1,38 @@
 import { AppError } from "@errors/AppError";
+import { ICreateUserDTO } from "@modules/user/dtos/ICreateUserDTO";
 
 import "reflect-metadata";
-import { UsersRepository } from "../../repositories/implementations/UsersRepository";
+import { UsersRepositoryInMemory } from "../../repositories/implementations/UsersRepositoryInMemory";
+import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
 let authenticateUserUseCase: AuthenticateUserUseCase;
-let usersRepository: UsersRepository;
+let usersRepositoryInMemory: UsersRepositoryInMemory;
+let createUserUseCase: CreateUserUseCase;
 
 describe("Authenticate User", () => {
   beforeEach(() => {
-    usersRepository = new UsersRepository();
-    authenticateUserUseCase = new AuthenticateUserUseCase(usersRepository);
+    usersRepositoryInMemory = new UsersRepositoryInMemory();
+    authenticateUserUseCase = new AuthenticateUserUseCase(
+      usersRepositoryInMemory
+    );
+    createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
 
   it("Should be able to authenticate an user", async () => {
-    const user = {
+    const user: ICreateUserDTO = {
+      name: "Victor",
       email: "munternl13@gmail.com",
+      phone: "11944450798",
       password: "victor54",
     };
 
-    const result = await authenticateUserUseCase.execute(user);
+    await createUserUseCase.execute(user);
+
+    const result = await authenticateUserUseCase.execute({
+      email: user.email,
+      password: user.password,
+    });
 
     expect(result).toHaveProperty("token");
   });
