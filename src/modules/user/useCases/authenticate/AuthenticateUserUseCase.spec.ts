@@ -1,3 +1,5 @@
+import { AppError } from "@errors/AppError";
+
 import "reflect-metadata";
 import { UsersRepository } from "../../repositories/implementations/UsersRepository";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
@@ -20,5 +22,23 @@ describe("Authenticate User", () => {
     const result = await authenticateUserUseCase.execute(user);
 
     expect(result).toHaveProperty("token");
+  });
+
+  it("should not be able to authenticate an nonexistent user", () => {
+    expect(async () => {
+      await authenticateUserUseCase.execute({
+        email: "false@email.com",
+        password: "password_false",
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
+
+  it("should not be able to authenticate with incorrect password", () => {
+    expect(async () => {
+      await authenticateUserUseCase.execute({
+        email: "munternl13@gmail.com",
+        password: "password_false",
+      });
+    }).rejects.toBeInstanceOf(AppError);
   });
 });
