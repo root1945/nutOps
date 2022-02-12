@@ -2,16 +2,16 @@ import { AppError } from "@errors/AppError";
 import { ICreateUserDTO } from "@modules/user/dtos/ICreateUserDTO";
 
 import "reflect-metadata";
-import { UsersRepository } from "../../repositories/implementations/UsersRepository";
+import { UsersRepositoryInMemory } from "../../repositories/implementations/UsersRepositoryInMemory";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 let createUserUseCase: CreateUserUseCase;
-let usersRepository: UsersRepository;
+let usersRepositoryInMemory: UsersRepositoryInMemory;
 
 describe("Authenticate User", () => {
   beforeEach(() => {
-    usersRepository = new UsersRepository();
-    createUserUseCase = new CreateUserUseCase(usersRepository);
+    usersRepositoryInMemory = new UsersRepositoryInMemory();
+    createUserUseCase = new CreateUserUseCase(usersRepositoryInMemory);
   });
 
   it("Should be able to create a new user", async () => {
@@ -19,7 +19,7 @@ describe("Authenticate User", () => {
       name: "Vitoria",
       email: "vitoria@gmail.com",
       phone: "11956585586",
-      password: "valeria54",
+      password: "vitoria54",
     };
 
     const userCreated = await createUserUseCase.execute(user);
@@ -33,7 +33,7 @@ describe("Authenticate User", () => {
         name: "Vitoria",
         email: "vitoria@gmail.com",
         phone: "11956585586",
-        password: "valeria54",
+        password: "vitoria54",
       };
 
       await createUserUseCase.execute(user);
