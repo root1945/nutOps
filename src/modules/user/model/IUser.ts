@@ -4,5 +4,5 @@ export interface IUser {
   phone: string;
   email: string;
   password: string;
-  created_at: number;
+  created_at: Date;
 }
