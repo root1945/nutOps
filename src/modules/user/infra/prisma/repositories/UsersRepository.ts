@@ -1,9 +1,8 @@
 import { prisma } from "@database/index";
+import { ICreateUserDTO } from "@modules/user/dtos/ICreateUserDTO";
+import { IUser } from "@modules/user/model/IUser";
+import { IUsersRepository } from "@modules/user/repositories/IUsersRepository";
 import { Prisma } from "@prisma/client";
-
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { IUser } from "../../model/IUser";
-import { IUsersRepository } from "../IUsersRepository";
 
 class UsersRepository implements IUsersRepository {
   private repository: Prisma.UsersDelegate<

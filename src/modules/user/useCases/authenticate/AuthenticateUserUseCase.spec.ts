@@ -2,7 +2,7 @@ import { AppError } from "@errors/AppError";
 import { ICreateUserDTO } from "@modules/user/dtos/ICreateUserDTO";
 
 import "reflect-metadata";
-import { UsersRepositoryInMemory } from "../../repositories/implementations/UsersRepositoryInMemory";
+import { UsersRepositoryInMemory } from "../../repositories/inMemory/UsersRepositoryInMemory";
 import { CreateUserUseCase } from "../createUser/CreateUserUseCase";
 import { AuthenticateUserUseCase } from "./AuthenticateUserUseCase";
 
