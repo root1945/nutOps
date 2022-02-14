@@ -3,10 +3,10 @@ import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 
-import { AppError } from "./errors/AppError";
+import { AppError } from "../../errors/AppError";
 import { router } from "./routes";
 
-import "./shared/container";
+import "../../container";
 
 dotenv.config();
 

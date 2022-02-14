@@ -15,7 +15,7 @@ class UsersRepositoryInMemory implements IUsersRepository {
   }: ICreateUserDTO): Promise<IUser> {
     const user = {
       id: String(uuidv4()),
-      created_at: Date.now(),
+      created_at: new Date(Date.now()),
     };
 
     this.users.push(
