@@ -9,14 +9,8 @@
       "@modules/*": [
         "modules/*"
       ],
-      "@database/*": [
-        "database/*"
-      ],
       "@shared/*": [
         "shared/*"
-      ],
-      "@errors/*": [
-        "errors/*"
       ],
       "@utils/*": [
         "utils/*"

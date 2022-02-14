@@ -1,5 +1,5 @@
-import { AppError } from "@errors/AppError";
 import { ICreateUserDTO } from "@modules/user/dtos/ICreateUserDTO";
+import { AppError } from "@shared/errors/AppError";
 
 import "reflect-metadata";
 import { UsersRepositoryInMemory } from "../../repositories/inMemory/UsersRepositoryInMemory";
