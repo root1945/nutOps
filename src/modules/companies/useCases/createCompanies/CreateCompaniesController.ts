@@ -17,7 +17,11 @@ class CreateCompaniesController {
       createBy: request.user.id,
     });
 
-    return response.status(201).json(Companies);
+    return response.status(201).json({
+      Companies,
+      message: "Empresa cadastrada com sucesso!",
+      status: "success",
+    });
   }
 }
 

@@ -19,7 +19,11 @@ class CreateUserController {
       password,
     });
 
-    return response.status(201).json(user);
+    return response.status(201).json({
+      user,
+      message: "Usuário cadastrado com sucesso!",
+      status: "success",
+    });
   }
 }
 
