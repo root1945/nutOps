@@ -23,13 +23,13 @@ class CreateUserUseCase {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userAlreadyExists) {
-      throw new AppError("User already exists");
+      throw new AppError("Usuário já foi cadastrado!", 401, "warn");
     }
 
     const phoneAlreadyExists = await this.usersRepository.findByPhone(phone);
 
     if (phoneAlreadyExists) {
-      throw new AppError("Phone already exists");
+      throw new AppError("Celular já foi cadastrado!", 401, "warn");
     }
 
     const passwordHash = await hash(password, 8);

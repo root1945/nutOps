@@ -23,6 +23,15 @@ class CompaniesRepository implements ICompaniesRepository {
 
     return companies;
   }
+
+  async findByNameCompanies(name: string): Promise<ICompanies> {
+    const companies = await this.repository.findUnique({
+      where: {
+        name,
+      },
+    });
+    return companies;
+  }
 }
 
 export { CompaniesRepository };
