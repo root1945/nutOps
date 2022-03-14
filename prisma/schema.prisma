@@ -17,6 +17,17 @@ model Users {
   created_at DateTime @default(now())
 
   @@map("users")
+  Companies Companies[]
+}
+
+model Companies {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  createBy   String
+  created_at DateTime @default(now())
+  users      Users    @relation(fields: [createBy], references: [id])
+
+  @@map("companies")
 }
 
 model Permissions {
