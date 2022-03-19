@@ -44,5 +44,4 @@ jobs:
           script: |
            cd ~/nutOps/nutOps
            yarn
-           yarn build
            pm2 restart nutops_api
