@@ -25,7 +25,7 @@ jobs:
         
       - name: Build
         run: yarn build
-      
+        
       - name: Push
         run: git push
       
@@ -36,7 +36,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
           source: "., !node_modules"
-          target: "test"
+          target: "~/nutOps/nutOps"  
       - name: Update Api
         uses: appleboy/ssh-action@master
         with:
