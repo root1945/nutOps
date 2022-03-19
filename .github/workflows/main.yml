@@ -44,4 +44,4 @@ jobs:
           script: |
            cd ~/nutOps
            yarn
-           pm2 restart nutops_api
+           pm2 restart server
