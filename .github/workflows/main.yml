@@ -26,9 +26,6 @@ jobs:
       - name: Build
         run: yarn build
         
-      - name: Push
-        run: git push
-      
       - uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
