@@ -12,6 +12,12 @@ interface IRequest {
 
 interface IResponse {
   token: string;
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    phone: string;
+  };
 }
 
 @injectable()
@@ -37,7 +43,15 @@ class AuthenticateUserUseCase {
       expiresIn: "24h",
     });
 
-    return { token };
+    return {
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+      },
+    };
   }
 }
 

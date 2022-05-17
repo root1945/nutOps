@@ -13,12 +13,12 @@ class AuthenticateUserController {
 
     const authenticateUserUseCase = container.resolve(AuthenticateUserUseCase);
 
-    const token = await authenticateUserUseCase.execute({
+    const result = await authenticateUserUseCase.execute({
       email,
       password,
     });
 
-    return response.json(token);
+    return response.json(result);
   }
 }
 
