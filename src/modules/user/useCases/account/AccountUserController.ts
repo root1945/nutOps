@@ -9,13 +9,9 @@ class AccountUserController {
   async handle(request: Request, response: Response): Promise<Response> {
     validator(request.headers, ["authorization"]);
 
-    const authHeader = request.headers.authorization;
-
-    const [, token] = authHeader.split(" ");
-
     const accountUserUseCase = container.resolve(AccountUserUseCase);
 
-    const result = await accountUserUseCase.execute(token);
+    const result = await accountUserUseCase.execute(request.user.id);
 
     return response.json(result);
   }

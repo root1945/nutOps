@@ -1,9 +1,7 @@
-import { verify } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
 import { IUser } from "@modules/user/model/IUser";
 
-import { AppError } from "../../../../shared/errors/AppError";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 @injectable()
@@ -16,19 +14,11 @@ class AccountUserUseCase {
   async execute(
     params: AccountUserUseCase.Params
   ): Promise<AccountUserUseCase.Response> {
-    try {
-      const { sub: userId } = verify(params, process.env.SECRET_TOKEN);
+    const userId = params;
 
-      const user = await this.usersRepository.findById(userId.toString());
+    const user = await this.usersRepository.findById(userId);
 
-      return user;
-    } catch (err) {
-      throw new AppError(
-        "Usuário não encontrado ou Token ínvalido. ",
-        401,
-        "warn"
-      );
-    }
+    return user;
   }
 }
 

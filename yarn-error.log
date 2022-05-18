@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add cors
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add multer
 
 PATH: 
   C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\Git\cmd;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\ProgramData\chocolatey\bin;C:\Program Files\erl-24.1.4\bin;C:\Program Files (x86)\Elixir\bin;C:\Users\dioni\.mix\escripts;C:\ProgramData\chocolatey\lib\Elixir/bin;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;"C:\Users\Me\bin;C:\Windows\System32";C:\Program Files\Amazon\AWSCLIV2\;C:\Users\dioni\AppData\Local\Microsoft\WindowsApps;C:\Users\dioni\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\dioni\AppData\Local\GitHubDesktop\bin;C:\Users\dioni\AppData\Roaming\npm;C:\Users\dioni\AppData\Local\Yarn\bin;C:\Program Files\heroku\bin

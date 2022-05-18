@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-1.1.x"]
 }
 
@@ -16,13 +16,28 @@ model Users {
   password   String
   created_at DateTime @default(now())
 
-  @@map("users")
   Companies Companies[]
+  Avatar    Avatar[]
+  @@map("users")
+}
+
+model Avatar {
+  id         String   @id @default(uuid())
+  createBy   String
+  type       String
+  name       String
+  data       String   @db.LongText
+  created_at DateTime @default(now())
+
+  users Users @relation(fields: [createBy], references: [id])
+  @@map("avatar")
 }
 
 model Companies {
   id         String   @id @default(uuid())
   name       String   @unique
+  phone      String
+  sector     String
   createBy   String
   created_at DateTime @default(now())
   users      Users    @relation(fields: [createBy], references: [id])

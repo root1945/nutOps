@@ -17,6 +17,7 @@ interface IResponse {
     name: string;
     email: string;
     phone: string;
+    Avatar?: any;
   };
 }
 
@@ -50,6 +51,7 @@ class AuthenticateUserUseCase {
         name: user.name,
         email: user.email,
         phone: user.phone,
+        Avatar: user.Avatar ?? [],
       },
     };
   }

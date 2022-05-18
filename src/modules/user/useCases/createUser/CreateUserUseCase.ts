@@ -1,10 +1,8 @@
 import { hash } from "bcryptjs";
-import { IUser } from "modules/user/model/IUser";
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "@shared/errors/AppError";
 
-import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
 @injectable()
@@ -19,7 +17,10 @@ class CreateUserUseCase {
     email,
     phone,
     password,
-  }: ICreateUserDTO): Promise<IUser> {
+    companyName,
+    companyPhone,
+    companySector,
+  }: CreateUserUseCase.Params): Promise<void> {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userAlreadyExists) {
@@ -34,15 +35,28 @@ class CreateUserUseCase {
 
     const passwordHash = await hash(password, 8);
 
-    const user = await this.usersRepository.create({
+    await this.usersRepository.create({
       name,
       email,
       phone,
       password: passwordHash,
+      companyName,
+      companyPhone,
+      companySector,
     });
-
-    return user;
   }
+}
+
+namespace CreateUserUseCase {
+  export type Params = {
+    name: string;
+    phone: string;
+    email: string;
+    password: string;
+    companyName: string;
+    companyPhone: string;
+    companySector: string;
+  };
 }
 
 export { CreateUserUseCase };

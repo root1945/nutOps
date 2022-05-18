@@ -7,8 +7,24 @@ import { CreateUserUseCase } from "./CreateUserUseCase";
 
 class CreateUserController {
   async handle(request: Request, response: Response): Promise<Response> {
-    validator(request.body, ["name", "email", "phone", "password"]);
-    const { name, email, phone, password } = request.body;
+    validator(request.body, [
+      "name",
+      "email",
+      "phone",
+      "password",
+      "companyName",
+      "companyPhone",
+      "companySector",
+    ]);
+    const {
+      name,
+      email,
+      phone,
+      password,
+      companyName,
+      companyPhone,
+      companySector,
+    } = request.body;
 
     const createUserUseCase = container.resolve(CreateUserUseCase);
 
@@ -17,6 +33,9 @@ class CreateUserController {
       email,
       phone,
       password,
+      companyName,
+      companyPhone,
+      companySector,
     });
 
     return response.status(201).json({

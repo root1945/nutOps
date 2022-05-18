@@ -1,6 +1,6 @@
-import { ICreateUserDTO } from "@modules/user/dtos/ICreateUserDTO";
 import { IUser } from "@modules/user/model/IUser";
 import { IUsersRepository } from "@modules/user/repositories/IUsersRepository";
+import { CreateUserUseCase } from "@modules/user/useCases/createUser/CreateUserUseCase";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@shared/infra/prisma/index";
 
@@ -18,23 +18,38 @@ class UsersRepository implements IUsersRepository {
     email,
     password,
     phone,
-  }: ICreateUserDTO): Promise<IUser> {
-    const user = await this.repository.create({
+    companyName,
+    companyPhone,
+    companySector,
+  }: CreateUserUseCase.Params): Promise<void> {
+    await this.repository.create({
       data: {
         email,
         name,
         phone,
         password,
+        Companies: {
+          create: {
+            name: companyName,
+            phone: companyPhone,
+            sector: companySector,
+          },
+        },
       },
     });
-
-    return user;
   }
 
   async findByEmail(email: string): Promise<IUser> {
     const user = await this.repository.findUnique({
       where: {
         email,
+      },
+      include: {
+        Avatar: {
+          orderBy: {
+            created_at: "desc",
+          },
+        },
       },
     });
     return user;
@@ -45,6 +60,13 @@ class UsersRepository implements IUsersRepository {
       where: {
         id: userId,
       },
+      include: {
+        Avatar: {
+          orderBy: {
+            created_at: "desc",
+          },
+        },
+      },
     });
     return user;
   }
@@ -53,6 +75,13 @@ class UsersRepository implements IUsersRepository {
     const user = await this.repository.findUnique({
       where: {
         phone,
+      },
+      include: {
+        Avatar: {
+          orderBy: {
+            created_at: "desc",
+          },
+        },
       },
     });
     return user;
