@@ -31,10 +31,10 @@ class CreateUserController {
     const user = await createUserUseCase.execute({
       name,
       email,
-      phone,
+      phone: phone.toString(),
       password,
       companyName,
-      companyPhone,
+      companyPhone: companyPhone.toString(),
       companySector,
     });
 
