@@ -1,3 +1,4 @@
+import { dirname } from "path";
 import { inject, injectable } from "tsyringe";
 
 import { IAvatarRepository } from "../../repositories/IAvatarRepository";
@@ -19,6 +20,9 @@ class ChangeAvatarUseCase {
       type: file.mimetype,
       data: `${__dirname}/tmp/${file.filename}`,
     });
+
+    const appDir = dirname(require.main);
+
 
     return `${__dirname}/tmp/${file.filename}`;
   }

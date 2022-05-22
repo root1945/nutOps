@@ -13,7 +13,7 @@ const userRoutes = Router();
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, "src/modules/user/useCases/changeAvatar/tmp/");
+    cb(null, "tmp");
   },
   filename(req, file, cb) {
     cb(null, `${Date.now() + file.originalname}`);
