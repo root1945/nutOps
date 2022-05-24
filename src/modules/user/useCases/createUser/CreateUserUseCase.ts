@@ -1,6 +1,10 @@
+/* eslint-disable no-use-before-define */
 import { hash } from "bcryptjs";
+import { resolve } from "path";
 import { inject, injectable } from "tsyringe";
+import { v4 as uuidv4 } from "uuid";
 
+import { IMailProvider } from "@shared/container/provider/IMailProvider/ImailProvider";
 import { AppError } from "@shared/errors/AppError";
 
 import { IUsersRepository } from "../../repositories/IUsersRepository";
@@ -9,7 +13,9 @@ import { IUsersRepository } from "../../repositories/IUsersRepository";
 class CreateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+    @inject("EmailProvider")
+    private mailProvider: IMailProvider
   ) {}
 
   async execute({
@@ -44,6 +50,29 @@ class CreateUserUseCase {
       companyPhone,
       companySector,
     });
+
+    const token = uuidv4();
+
+    const variables = {
+      name,
+      link: `https://api.nutops.com.br/verifyAccount/${token}`,
+    };
+
+    const templatePath = resolve(
+      __dirname,
+      "..",
+      "..",
+      "views",
+      "emails",
+      "createUserEmail.hbs"
+    );
+
+    await this.mailProvider.sendMail(
+      email,
+      "Ativação de Usuário",
+      variables,
+      templatePath
+    );
   }
 }
 
